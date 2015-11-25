@@ -494,8 +494,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                 // If we saved the uncompressed photo to the album, we can just
                 // return the URI we already created
                 if (this.saveToPhotoAlbum) {
-                	String realPathgalleryUri = FileHelper.getRealPath(galleryUri, this.cordova);
-                    this.callbackContext.success(realPathgalleryUri);
+                    this.callbackContext.success(galleryUri.toString());
                 } else {
                     Uri uri = Uri.fromFile(createCaptureFile(this.encodingType, System.currentTimeMillis() + ""));
 
@@ -504,8 +503,8 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                     } else {
                         writeUncompressedImage(this.imageUri, uri);
                     }
-                    String realPathuri = FileHelper.getRealPath(uri, this.cordova);
-                    this.callbackContext.success(realPathuri);
+                    
+                    this.callbackContext.success(uri.toString());
                 }
             } else {
                 Uri uri = Uri.fromFile(createCaptureFile(this.encodingType, System.currentTimeMillis() + ""));
@@ -540,8 +539,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                 }
 
                 // Send Uri back to JavaScript for viewing image
-                String realPathuri2 = FileHelper.getRealPath(uri, this.cordova);
-                this.callbackContext.success(realPathuri2);
+                this.callbackContext.success(uri.toString());
 
             }
         } else {
@@ -641,8 +639,9 @@ private String ouputModifiedBitmap(Bitmap bitmap, Uri uri) throws IOException {
             // rotating, nor compressing needs to be done
             if (this.targetHeight == -1 && this.targetWidth == -1 &&
                     (destType == FILE_URI || destType == NATIVE_URI) && !this.correctOrientation) {
-            	String realPathuri3 = FileHelper.getRealPath(uri, this.cordova);
-                this.callbackContext.success(realPathuri3);
+            	Context context = this.webView.getContext().getApplicationContext();  
+                this.callbackContext.success(FileHelper.getPath(context, uri));  
+//            	this.callbackContext.success(uri.toString());
             } else {
                 String uriString = uri.toString();
                 // Get the path to the image. Makes loading so much easier.
