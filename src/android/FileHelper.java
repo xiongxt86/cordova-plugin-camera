@@ -49,7 +49,7 @@ public class FileHelper {
      */
     @SuppressWarnings("deprecation")
     public static String getRealPath(Uri uri, CordovaInterface cordova) {
-        /*String realPath = null;
+        String realPath = null;
 
         if (Build.VERSION.SDK_INT < 11)
             realPath = FileHelper.getRealPathFromURI_BelowAPI11(cordova.getActivity(), uri);
@@ -60,8 +60,7 @@ public class FileHelper {
 
         // SDK > 19 (Android 4.4)
         else
-            realPath = FileHelper.getRealPathFromURI_API19(cordova.getActivity(), uri);*/
-    	String realPath = FileHelper.getPath(cordova.getActivity(), uri);
+            realPath = FileHelper.getRealPathFromURI_API19(cordova.getActivity(), uri);
         return realPath;
     }
 
