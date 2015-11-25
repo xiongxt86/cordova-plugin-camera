@@ -639,9 +639,7 @@ private String ouputModifiedBitmap(Bitmap bitmap, Uri uri) throws IOException {
             // rotating, nor compressing needs to be done
             if (this.targetHeight == -1 && this.targetWidth == -1 &&
                     (destType == FILE_URI || destType == NATIVE_URI) && !this.correctOrientation) {
-            	 String realPath = FileHelper.getRealPath(uri, this.cordova);
-                 this.callbackContext.success(realPath);
-//                this.callbackContext.success(uri.toString());
+                this.callbackContext.success(uri.toString());
             } else {
                 String uriString = uri.toString();
                 // Get the path to the image. Makes loading so much easier.
